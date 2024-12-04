@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Monitoring Dashboard - Transport License Department</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4faff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logout-button {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .logout-button:hover {
+            background-color: #cc0000;
+        }
+        .username {
+            font-size: 1rem;
+            color: #f4faff;
+        }
+        .content {
+            flex: 1;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100%;
+        }
+        .dashboard-embed {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>Revenue Monitoring Dashboard - Transport License Department</div>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </header>
+    <div class="content">
+        <iframe id="powerbi-embed" class="dashboard-embed" src="" allowFullScreen="true"></iframe>
+    </div>
+    <script>
+        // Retrieve the dashboard link and username for the logged-in user
+        const dashboardLink = localStorage.getItem('dashboardLink');
+        const username = localStorage.getItem('username');
+        const embedIframe = document.getElementById('powerbi-embed');
+
+        // Load the dashboard link
+        if (dashboardLink) {
+            embedIframe.src = dashboardLink;
+        } else {
+            document.body.innerHTML = "<h2 style='color: red; text-align: center; margin-top: 20px;'>Access Denied</h2>";
+        }
+
+        // Logout function
+        function logout() {
+            // Clear session data
+            localStorage.clear();
+
+            // Redirect to the login page
+            window.location.href = "login.html";
+
+            // Close the current window (optional)
+            window.open("", "_self").close();
+        }
+    </script>
+</body>
+</html>

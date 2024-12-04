@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Monitoring Dashboard - Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #003366; /* Solid naval blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 60px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .login-container h2 {
+            color: #003366;
+            margin-bottom: 20px;
+        }
+        .login-container input[type="text"], 
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            background-color: #003366;
+            color: white;
+            padding: 10px 15px;
+            border: 1px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px; /* Add space between button and input box */
+        }
+        .login-container button:hover {
+            background-color: #00509e;
+        }
+    </style>
+    <script>
+        // Disable forward navigation
+        window.onload = function () {
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function () {
+                window.history.go(1);
+            };
+        };
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login to Revenue Dashboard</h2>
+        <form onsubmit="return validateLogin()" method="POST">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script>
+        // User credentials and associated dashboard links
+        const users = {
+            "Headquarters": { password: "123456", dashboard: "https://tinyurl.com/4p49avft" },
+            "Acquiring_Bank": { password: "123456", dashboard: "https://tinyurl.com/3na77wak" },
+            "Account_Division": { password: "123456", dashboard: "https://shorturl.at/cCzUv" },
+            "TLD_Johor": { password: "123456", dashboard: "https://tinyurl.com/39s74d2x" },
+            "TLD_Kedah": { password: "123456", dashboard: "https://tinyurl.com/yds47emm" },
+            "TLD_Perlis": { password: "123456", dashboard: "https://tinyurl.com/bp7c6jcz" },
+            "TLD_N9": { password: "123456", dashboard: "https://tinyurl.com/bdr96dkv" },
+            "TLD_Selangor": { password: "123456", dashboard: "https://tinyurl.com/5n77rh5v" }
+        };
+
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (users[username] && users[username].password === password) {
+                // Store the user's dashboard link and username
+                localStorage.setItem('dashboardLink', users[username].dashboard);
+                localStorage.setItem('username', username); // Store the username
+                window.location.href = "dashboard.html";
+                return false;
+            } else {
+                alert("Invalid Username or Password!");
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
